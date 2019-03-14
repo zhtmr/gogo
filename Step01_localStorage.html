@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Step01_localStorage.html</title>
+</head>
+<body>
+<input type="text" id="inputMsg" placeholder="저장할 메세지 입력..." />
+<button id="saveBtn">저장 하기</button>
+<button id="loadBtn">불러오기</button>
+<script src="js/jquery-3.3.1.js"></script>
+<script>
+	//저장 버튼을 눌럿을때 실행할 함수 등록 
+	$("#saveBtn").click(function(){
+		//입력한 문자열을 읽어와서
+		var msg=$("#inputMsg").val();
+		//localStorage 에 savedMsg 라는 키값으로 저장하기
+		localStorage.savedMsg=msg;
+		alert("저장 하였습니다.");
+	});
+	//불러 오기 버튼을 눌렀을때 실행할 함수 등록 
+	$("#loadBtn").click(function(){
+		//localStorage 에 저장된 문자열을 읽어와서
+		var msg=localStorage.savedMsg;
+		//input 요소의 value 로 출력하기
+		$("#inputMsg").val(msg);
+	});
+</script>	
+</body>
+</html>
