@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>step02_canvas.html</title>
+	<style>
+		canvas{
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="500" height="500"></canvas>
+	<script>
+		// canvas 요소의 참조값 얻어오기      (도화지)
+		var canvas=document.querySelector("#myCanvas");
+		// canvas에 랜더링 할 수 있는 객체의 참조값 얻어오기      (먹지)
+		var context=canvas.getContext("2d");
+
+		// 선의 색상 지정
+		context.strokeStyle="#0000ff";
+		// 선의 굵기 지정
+		context.lineWidth="10";
+
+		context.beginPath(); // 경로 시작
+		context.moveTo(100,100); // 시작점 지정
+		context.lineTo(250,250); // 이을점 지정
+		context.stroke(); // 그리기
+	</script>
+</body>
+</html>
