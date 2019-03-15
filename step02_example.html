@@ -40,6 +40,10 @@
 		holeImg.src="images/hole.png";
 		// 총알 구멍 좌표(plain object)를 누적시킬 배열
 		var holes=[];
+		// 총소리 로딩하기
+		var fireSound=new Audio("sounds/fire.wav");
+		// 비명소리 로딩
+		var screamSound=new Audio("sounds/birddie.mp3")
 		
 
 
@@ -96,6 +100,20 @@
 
 			// 배열에 누적 시키기
 			holes.push(obj);
+			// 총소리 내기
+			fireSound.currentTime=0;
+			fireSound.play();
+
+			// 비명소리 내기
+			
+
+			if(){
+				
+				screamSound.play();
+			}
+
+			// 토끼 맞으면 토끼위치 랜덤한 위치로 변경
+
 		});
 
 
