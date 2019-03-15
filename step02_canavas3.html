@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>step02_canvas3.html</title>
+	<style>
+		canvas{
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<script src="js/jquery-3.3.1.js"></script>
+	<canvas id="myCanvas" width="500" height="500"></canvas>
+	<script>
+		// canvas 요소의 참조값 얻어오기      (도화지)
+		var canvas=document.querySelector("#myCanvas");
+		// canvas에 랜더링 할 수 있는 객체의 참조값 얻어오기      (먹지)
+		var context=canvas.getContext("2d");
+
+		// 이미지 로딩하기
+		var rabbitImg=new Image();
+		rabbitImg.src="images/rabbit_1.png";
+		// 토끼의 위치를 저장할 변수
+		var rabbitX=250;
+		var rabbitY=250;
+
+		setInterval(function(){
+			context.clearRect(0,0,500,500);
+			context.drawImage(rabbitImg,rabbitX-50 ,rabbitY-50 , 100, 100);
+		}, 10);
+
+		$("#myCanvas").on("mousemove", function(e){
+			// 마우스 이벤트가 일어난 곳의 좌표를 토끼의 좌표에 반영하기
+			rabbitX=e.offsetX;
+			rabbitY=e.offsetY;
+		});
+	</script>
+</body>
+</html>
