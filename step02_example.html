@@ -106,9 +106,10 @@
 
 			// 비명소리 내기
 			
-
-			if(){
-				
+			// x좌표가 rabbitX 좌표 범위 안에 있으면
+			// y좌표가 rabbitY 좌표 범위 안에 있으면
+			if(e.offsetX < rabbitX+100){
+				screamSound.currentTime=0;
 				screamSound.play();
 			}
 
