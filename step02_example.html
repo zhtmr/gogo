@@ -35,14 +35,29 @@
 		snipeImg.src="images/snipe.png";
 		// 스나이프의 좌표
 		var snipeX=0, snipeY=0;
+		// 총알 구멍 이미지 로딩
+		var holeImg=new Image();
+		holeImg.src="images/hole.png";
+		// 총알 구멍 좌표(plain object)를 누적시킬 배열
+		var holes=[];
+		
+
 
 		setInterval(function(){
 			// 배경이미지 그리기
 			context.drawImage(backImg, 0,0, 800, 500);
+			//반복문 돌면서 총알 구멍 이미지 그리기
+			for(var i=0; i<holes.length; i++){
+				//i 번째 방에 있는 총알 구멍 정보 object를 얻어온다.
+				var tmp=holes[i];
+				//tmp에 있는 좌표를 이용해서 총알 구멍 그리기
+				context.drawImage(holeImg, tmp.x-10, tmp.y-10, 20, 20);
+			}
 			// 토끼 이미지 그리기
 			context.drawImage(rabbitImgs[rabbitIndex], rabbitX-50, rabbitY-50, 100, 100);
 			// 스나이프 이미지 그리기
 			context.drawImage(snipeImg,snipeX-50 ,snipeY-50 , 100, 100);
+
 
 			// 카운트를 1 증가 시킨다.
 			count++;
@@ -63,12 +78,27 @@
 
 		
 
-
+		// 마우스움직이는 좌표를 스나이프 좌표에 대입
 		$("#myCanvas").on("mousemove", function(e){
 			
 			snipeX=e.offsetX;
 			snipeY=e.offsetY;
 		});
+
+		// mousedown 이벤트 처리
+		$("#myCanvas").on("mousedown",function(e){
+			// 총알 구멍의 좌표를 담을 object
+			var obj={};
+			// x,y라는 방에 x좌표와 y좌표를 담는다.
+			obj.x=e.offsetX;
+			obj.y=e.offsetY;
+			//  == var obj={x:e.offsetX, y:e.offsetY};
+
+			// 배열에 누적 시키기
+			holes.push(obj);
+		});
+
+
 	</script>
 </body>
 </html>
