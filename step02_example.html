@@ -108,12 +108,17 @@
 			
 			// x좌표가 rabbitX 좌표 범위 안에 있으면
 			// y좌표가 rabbitY 좌표 범위 안에 있으면
-			if(e.offsetX > rabbitX-50 && e.offsetX<rabbitX+150 && e.offsetY > rabbitY-50 && e.offsetY < rabbitY+150){
+			if(e.offsetX > rabbitX-50 && e.offsetX<rabbitX+50 && e.offsetY > rabbitY-50 && e.offsetY < rabbitY+50){
 				screamSound.currentTime=0;
 				screamSound.play();
 			}
 
 			// 토끼 맞으면 토끼위치 랜덤한 위치로 변경
+			// 0~500px 랜덤
+			
+
+			context.drawImage(rabbitImgs[rabbitIndex], rabbitX-Math.random()*500, rabbitY-Math.random()*500, 100, 100);
+
 
 		});
 
