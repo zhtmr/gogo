@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		var msg="-4차 산업혁명 태풍이 몰려온다. 인공지능, 빅데이터, IoT, 로봇공학, 나노기술,무인운송수단,3D프린팅-"
+
+
+
+		for(i=0; i<60; i++){
+			msg=" " +msg;
+		}
+
+		
+		function scrollTrend(){
+			// substring()적용
+			
+
+			// 재귀호출
+
+			document.myform.trend.value=msg.substring(0,59);
+			msg=msg.substring(1,msg.length)+msg.substring(0,1);  // substring(begin index, end index), begin index 자리에서부터 (end index-begin index) 만큼 가져온다.
+
+			timeout=setTimeout("scrollTrend()",100)
+
+		}
+
+		function stopTrend(){
+			clearTimeout(timeout); // 실행중지
+		}
+
+	</script>
+</head>
+<body onload="scrollTrend()">
+	<form name="myform">
+		<table>
+			<tr>
+				<h3>IT 트랜드 ISSUE</h3>
+				<td><input type="text" name="trend" size="130" style="background-color: yellow" onmouseover="stopTrend()" onmouseout="scrollTrend()"></td>
+
+
+				<marquee>오잉</marquee>
+			</tr>
+		</table>
+	</form>
+
+</body>
+</html>

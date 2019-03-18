@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		showtext = new Array(8);
+
+		showtext[0] = "본 회사의 설립목적은"
+		showtext[1] = "기업간 전자상거래를 위한 B2B solution을 보유한"
+		showtext[2] = "미래 정보화 사회의 구축을 선도하는 회사가 되고자 합니다."
+		showtext[3] = "경영이념은"
+		showtext[4] = "항상 창조적이고 도전적인 기업문화 선도"
+		showtext[5] = "꿈과 희망을 실현하려는 도전"
+		showtext[6] = "기술혁신을 통한 변화"
+		showtext[7] = "자유로우며 창조적인 사고"
+
+		// 1. 변수 설정
+		var len=8;
+		var index=0;
+		var pos=0;
+
+		// 2. 함수 구현
+		function startTyping(){
+			document.myform.tfield.value=showtext[index].substring(0,pos)+"_";
+			if(pos==showtext[index].length){
+				pos=0;
+				index++;
+				if(index==len)
+					index=0;
+				timeout=setTimeout("startTyping()",1200);
+			}else{
+				pos++;
+				timeout=setTimeout("startTyping()",100);
+			}
+		}
+
+		function stopTyping(){
+			clearTimeout(timeout); // 실행중지
+		}
+	</script>
+</head>
+<body onload="startTyping()">
+	<h2>타이핑하는 것처럼 문자열 보여주기</h2>
+	<form name="myform">
+		<input type="text" name="tfield" size="100" style="background-color: yellow" onmouseover="stopTyping()" onmouseout="startTyping()">
+	</form>
+</body>
+</html>

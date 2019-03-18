@@ -5,6 +5,36 @@
 	<meta charset="UTF-8">
 <title>회원가입</title>
 
+<script type="text/javascript">
+	function juminCheck(jumin1, jumin2){
+		var sum =0;
+		var tmp =0;
+		var result =0;
+		// 배열 객체 만드는 방법 1
+		// var weight =new Array(2,3,4,5,6,7,8,9,2,3,4,5);
+		// 배열 객체 만드는 방법2
+		var weight=[2,3,4,5,6,7,8,9,2,3,4,5];
+
+		var juminNum = jumin1+jumin2;
+		// 1단계 공식 적용
+		for(i=0; i<12; i++){
+			sum=sum+(juminNum.charAt(i))*weight[i];
+		}
+		// 2단계 공식 적용
+		tmp=11-(sum%11);
+
+		// 3단계 공식 
+		result=tmp%10;
+
+		if(result!=juminNum.charAt(12)){
+			alert("주민번호가 맞지 않습니다!!");
+			document.regForm.mem_num1.focus();
+		}else{
+			alert("정상");
+			document.regForm.mem_email.focus();
+		}
+	}
+</script>
 </head>
 <body>
 <br><br>
@@ -43,10 +73,10 @@
 			<tr>
 					<td>주민등록번호</td>
 					<td><input type="text" name="mem_num1" size="6"
-					      maxlength="6"> -
+					      maxlength="6" onkeyup="if(this.value.length==6)regForm.mem_num2.focus();"> -
 						<input type="text" name="mem_num2" size="7"
 					      maxlength="7">
-                        <input type="button" value="주민등록번호 체크">
+                        <input type="button" value="주민등록번호 체크" onclick="juminCheck(this.form.mem_num1.value,this.form.mem_num2.value)">
 					</td>
 			</tr>
 			
