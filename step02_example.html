@@ -101,12 +101,16 @@
 		setInterval(function(){
 			// 남은 시간을 줄이고
 			remainTime--;
+			// 남은시간이 0이면 game over
+			if(remainTime==0){
+				
+			}
 			// 남은 시간을 출력한다.			
 			$("#remainTime").text(remainTime);
 			// 진행 %를 계산한다.
 			var percent=(remainTime/60)*100;
 			// progress-bar 폭에 반영하기
-			$(".progress-bar").css("width",percent+"%")
+			$(".progress-bar").css("width",percent+"%");
 		},1000);
 
 
