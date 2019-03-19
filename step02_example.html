@@ -272,9 +272,7 @@
 			var obj={};                         // 여러개의 총알 구멍 좌표가 전부 필요하기때문에 오브젝트에 담아놓는다.
 			// x,y라는 방에 x좌표와 y좌표를 담는다.
 			obj.x=e.offsetX;
-			obj.y=e.offsetY;
-			// == var obj={x:e.offsetX, y:e.offsetY};
-
+			obj.y=e.offsetY; // == var obj={x:e.offsetX, y:e.offsetY};			
 			// 배열에 누적 시키기
 			holes.push(obj);
 			// 총소리 내기
