@@ -13,8 +13,8 @@
 	<canvas id="myCanvas" width="800" height="500"></canvas>
 	<script src="js/jquery-3.3.1.js"></script>
 	<script>
-		var canvas=document.querySelector("#myCanvas");
-		var context=canvas.getContext("2d");
+		var canvas=document.querySelector("#myCanvas");  // canvas 참조값 얻기
+		var context=canvas.getContext("2d");  // 
 		// 배경 이미지 로딩하기
 		var backImg=new Image();
 		backImg.src="images/background.jpg";
@@ -61,6 +61,10 @@
 		var fragImgs=[r0, r1,r2,r3,r4];
 		// 토끼 파편 정보를 담을 배열
 		var fragments=[];
+		// 총의 반동값을 저장할 변수
+		var banY=0;
+		// 총의 장전 여부
+		var isReady=true;
 
 		
 
@@ -78,10 +82,15 @@
 			//토끼 파편 이미지 그리기
 			for(var i=0; i<fragments.length;i++){
 				var tmp=fragments[i];
+				// context의 현재 상태를 저장(조작하지 않은 정상상태)
 				context.save();
+				// context를 파편이 위치해야 하는곳으로 평행이동
 				context.translate(tmp.x,tmp.y);
+				// context를 파편이 회전해야 하는 각만큼 회전
 				context.rotate(tmp.angle);
+				// 파편을 원점에 그린다.
 				context.drawImage(fragImgs[tmp.index], -50, -50, 100,100);
+				// 다음번 작업을 위해서 context를 저장된 상태로 되돌리기
 				context.restore();
 
 			}
@@ -89,7 +98,7 @@
 			// 토끼 이미지 그리기
 			context.drawImage(rabbitImgs[rabbitIndex], rabbitX-50, rabbitY-50, 100, 100);
 			// 스나이프 이미지 그리기
-			context.drawImage(snipeImg,snipeX-50 ,snipeY-50 , 100, 100);
+			context.drawImage(snipeImg,snipeX-50 ,snipeY-50-banY , 100, 100);
 
 
 			// 카운트를 1 증가 시킨다.
@@ -101,8 +110,14 @@
 			// 화면을 벗어난 파편은 제거하는 함수 호출
 			checkFragment();
 
-			
+			banY -= 1;
+			if(banY<=0){
+				banY=0;
+			}
+
+
 		}, 10);
+
 
 		function checkFragment(){
 			// 배열의 마지막번째 방번호 부터 시작해서 방번호를 1씩 감소
@@ -158,12 +173,19 @@
 
 		// mousedown 이벤트 처리
 		$("#myCanvas").on("mousedown",function(e){
+			if(isReady==false){ // 장전이 안됐으면 함수를 여기서 끝내라
+				return;
+			}
+			// 장전 상태를 바꿔준다.
+			isReady=false;
+			// 스나이프의 반동값 부여하기
+			banY=50;
 			// 총알 구멍의 좌표를 담을 object
 			var obj={};                         // 여러개의 총알 구멍 좌표가 전부 필요하기때문에 오브젝트에 담아놓는다.
 			// x,y라는 방에 x좌표와 y좌표를 담는다.
 			obj.x=e.offsetX;
 			obj.y=e.offsetY;
-			//  == var obj={x:e.offsetX, y:e.offsetY};
+			// == var obj={x:e.offsetX, y:e.offsetY};
 
 			// 배열에 누적 시키기
 			holes.push(obj);
@@ -171,8 +193,6 @@
 			fireSound.currentTime=0;
 			fireSound.play();
 
-			
-			
 			// x좌표가 rabbitX 좌표 범위 안에 있으면
 			// y좌표가 rabbitY 좌표 범위 안에 있으면
 			// 비명소리 내기
@@ -198,10 +218,7 @@
 				rabbitX=Math.random()*800;
 				rabbitY=Math.random()*500;
 				
-				
-
 			}
-
 			
 		});
 
