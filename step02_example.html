@@ -29,16 +29,16 @@
 		// 배경 이미지 로딩하기
 		var backImg=new Image();
 		backImg.src="images/background.jpg";
+
 		// 토끼 이미지 두개 로딩해서 배열에 담기
 		var rabbit1=new Image();
 		var rabbit2=new Image();
 		rabbit1.src="images/rabbit_1.png";
 		rabbit2.src="images/rabbit2.png";
 		var rabbitImgs=[rabbit1, rabbit2];
+		
 		// 토끼의 좌표
-
 		var rabbitX=400, rabbitY=250;
-
 		// 토끼 이미지 인덱스
 		var rabbitIndex=0;            // 토끼 좌표는 하나만 있어야되므로 변수 하나씩만 있으면된다.
 		// 카운트를 셀 변수
@@ -57,6 +57,7 @@
 		var fireSound=new Audio("sounds/fire.wav");
 		// 비명소리 로딩
 		var screamSound=new Audio("sounds/zombie.mp3")
+
 		//파편 이미지를 저장할 배열
 		var fragImgs=[];
 		// 토끼 파편 이미지 로딩
